@@ -23,72 +23,110 @@
     <cfscript>
       /* USERS */
       t = createTable(name='users', id=true);
-      t.integer(columnName="agencyid", null=true);
-      t.boolean(columnName='isadministrator', default=false, null=false);
-      t.string(columnName="firstname,lastname,phone,email", null=false, limit=50);
-      t.integer(columnName="accesslevel", null=false, default=1);
-      t.integer(columnName="statusid", null=false, default=1);
-      t.string(columnName="password,salt", null=false, limit=255);
-      t.string(columnName="passwordresettoken", null=true, limit=255);
-      t.datetime(columnName="passwordresetat", null=true);
-      t.boolean(columnName='isconfirmed', default=false, null=false);
-      t.string(columnName="emailconfirmationtoken", null=true, limit=255);
-      t.datetime(columnName="lastloginat", null=true);
-      t.integer(columnName="logincount", null=false, default=0);
+      t.integer(columnNames="agencyid", null=true);
+      // t.references("agencies");
+      t.boolean(columnNames='isadministrator', default=false, null=false);
+      t.string(columnNames="firstname,lastname", null=false, limit=64);
+      t.string(columnNames="phone", null=false, limit=64);
+      t.string(columnNames="email", null=false, limit=64);
+      t.integer(columnNames="accesslevel", null=false, default=1);
+      t.integer(columnNames="statusid", null=false, default=1);
+      t.string(columnNames="password,salt", null=false, limit=256);
+      t.string(columnNames="passwordresettoken", null=true, limit=256);
+      t.datetime(columnNames="passwordresetat", null=true);
+      t.boolean(columnNames='isconfirmed', default=false, null=false);
+      t.string(columnNames="emailconfirmationtoken", null=true, limit=256);
+      t.datetime(columnNames="lastloginat", null=true);
+      t.integer(columnNames="logincount", null=false, default=0);
       t.timestamps();
       t.create();
 
       /* AGENCIES */
       t = createTable(name='agencies', id=true);
-      t.string(columnName="name", null=false, limit=50);
-      t.string(columnName="streetnumber", null=true, limit=25);
-      t.string(columnName="streetname", null=true, limit=50);
-      t.string(columnName="suburb", null=true, limit=50);
-      t.string(columnName="phone", null=true, limit=25);
-      t.string(columnName="email", null=true, limit=50);
-      t.integer(columnName="statusid", null=false, default=1);
-      t.integer(columnName="accesslevel", null=false, default=1);
-      t.integer(columnName="statusid", null=false, default=1);
+      t.string(columnNames="name", null=false, limit=64);
+      t.string(columnNames="streetnumber", null=true, limit=16);
+      t.string(columnNames="streetname", null=true, limit=64);
+      t.string(columnNames="suburb", null=true, limit=32);
+      t.string(columnNames="phone", null=true, limit=16);
+      t.string(columnNames="email", null=true, limit=64);
+      t.integer(columnNames="statusid", null=false, default=1);
+      t.integer(columnNames="accesslevel", null=false, default=1);
       t.timestamps();
       t.create();
 
-      /* CLIENTS */
-      t = createTable(name='clients', id=true);
-      t.integer(columnName="agencyid", null=false);
-      t.string(columnName="name", null=false, limit=50);
-      t.string(columnName="website", null=false, limit=50);
-      t.string(columnName="phone", null=true, limit=25);
-      t.string(columnName="email", null=true, limit=50);
-      t.integer(columnName="statusid", null=false, default=1);
-      t.integer(columnName="accesslevel", null=false, default=1);
-      t.integer(columnName="statusid", null=false, default=1);
+      /* CUSTOMERS */
+      t = createTable(name='customers', id=true);
+      t.integer(columnNames="agencyid", null=false);
+      // t.references("agencies");
+      t.string(columnNames="name", null=false, limit=64);
+      t.string(columnNames="website", null=false, limit=64);
+      t.string(columnNames="phone", null=true, limit=16);
+      t.string(columnNames="email", null=true, limit=64);
+      t.integer(columnNames="statusid", null=false, default=1);
+      t.integer(columnNames="accesslevel", null=false, default=1);
       t.timestamps();
       t.create();
 
       /* PUBLISHERS */
       t = createTable(name='publishers', id=true);
-      t.integer(columnName="clientid", null=false);
-      t.string(columnName="name", null=false, limit=50);
-      t.string(columnName="website", null=false, limit=50);
-      t.string(columnName="phone", null=true, limit=25);
-      t.string(columnName="email", null=true, limit=50);
-      t.string(columnName="contactname", null=false, limit=50);
-      t.integer(columnName="statusid", null=false, default=1);
-      t.integer(columnName="accesslevel", null=false, default=1);
-      t.integer(columnName="statusid", null=false, default=1);
+      t.integer(columnNames="customerid", null=false);
+      // t.references("customers");
+      t.string(columnNames="name", null=false, limit=64);
+      t.string(columnNames="website", null=false, limit=64);
+      t.string(columnNames="contactname", null=false, limit=64);
+      t.string(columnNames="phone", null=true, limit=16);
+      t.string(columnNames="email", null=true, limit=64);
+      t.integer(columnNames="statusid", null=false, default=1);
       t.timestamps();
       t.create();
 
       /* CAMPAIGNS */
-
-
-      /* CLICKS */
-
+      t = createTable(name='campaigns', id=true);
+      t.integer(columnNames="customerid", null=false);
+      // t.references("customers");
+      t.string(columnNames="name", null=false, limit=64);
+      t.datetime(columnNames="startat,finishat", null=true);
+      t.integer(columnNames="creatoruserid", null=false);
+      t.timestamps();
+      t.create();
 
       /* ASSETS */
+      t = createTable(name='assets', id=true);
+      t.integer(columnNames="campaignid", null=false);
+      t.integer(columnNames="publisherid", null=false);
+      // t.references("campaigns,publishers");
+      t.string(columnNames="name", null=false, limit=64);
+      t.string(columnNames="sourceurl", null=false, limit=128);
+      t.string(columnNames="destinationurl", null=false, limit=128);
+      t.datetime(columnNames="startat,finishat", null=true);
+      t.text(columnNames="notes", null=true);
+      t.timestamps();
+      t.create();
 
+      /* CLICKS */
+      t = createTable(name='clicks', id=true);
+      // t.references("assets");
+      t.integer(columnNames="assetid", null=false);
+      t.string(columnNames="ipaddress", null=false, limit=32);
+      t.string(columnNames="browser", null=false, limit=32);
+      t.string(columnNames="browserversion", null=false, limit=16);
+      t.datetime(columnNames="createdat", null=true);
+      t.create();
 
-      /* USERLOGS */
+      /* ACTIONS */
+      t = createTable(name='actions', id=true);
+      t.string(columnNames="entitytype", null=false, limit=16);
+      t.integer(columnNames="entityid", null=false);
+      // t.references("users");
+      t.datetime(columnNames="createdat", null=true);
+      t.create();
+
+      /* CHANGES */    
+      t = createTable(name='changes', id=true);
+      t.integer(columnNames="actionid", null=false);
+      // t.references("actions");
+      t.string(columnNames="oldvalue,newvalue", null=false, limit=64);
+      t.create();
 
     </cfscript>
   </cffunction>

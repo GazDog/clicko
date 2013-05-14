@@ -38,6 +38,7 @@
 	 * @hint Secures the password property before saving it.
 	 */
 	private void function securePassword() {
+
 		if ( StructKeyExists(this, "passwordConfirmation") ) {
 			var bCrypt = CreateObject("java", "BCrypt", "/lib");
 			this.salt = bCrypt.genSalt();
