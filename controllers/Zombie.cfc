@@ -1,7 +1,7 @@
 <cfcomponent extends="Controller">
 	
 	<cffunction name="init">
-		<cfset filters(through="safetyCatch,strings", only="reset")>
+		<cfset filters(through="safetyCatch,strings", only="resetDatabase")>
 	</cffunction>
 	
 	<!--- 
@@ -31,7 +31,7 @@
 	PUBLIC ACTIONS
 	 --->
 
-	<cffunction name="reset">
+	<cffunction name="resetDatabase">
 		
 		<cfset var loc = {}>
 		<cfset var crlf = Chr(13) & Chr(10)>
@@ -51,8 +51,8 @@
 		<cfset gaz = model("User").new(firstname="Garry", lastname="Morrow", position="Manager", email="garry@fullnoise.com.au", password=standardPassword, passwordConfirmation=standardPassword, isadministrator=1)>
 		<cfset gaz.save()>
 
-		<cfdump var="#adam.allErrors()#">
-
+<!--- 		<cfdump var="#adam.allErrors()#" abort="true">
+ --->
 		<!--- common object properties --->
 		<cfset facebookStruct = {name="Facebook" ,website="www.facebook.com" ,contactname="John Doe" ,phone="(657) 9856 4543" ,email="joe@facebook.com"}>
 		<cfset fullnoiseStruct = {name="Fullnoise" ,website="www.fullnoise.com.au" ,contactname="Garry Morrow" ,phone="(03) 9899 7687" ,email="garry@fullnoise.com"}>
@@ -62,7 +62,7 @@
 			** ZOMBIE **
 		 --->
 		<!--- agency --->
-		<cfset zombie = model("Agency").new(name="Zombie Management", streetnumber="666", streetname="Dragula Avenue", suburb="Jacksonville", phone="(02) 9876 4543", email="mail@zombie.com")>
+		<cfset zombie = model("Agency").new(name="Zombie Management", accessLevel=2, streetnumber="666", streetname="Dragula Avenue", suburb="Jacksonville", phone="(02) 9876 4543", email="mail@zombie.com")>
 		<cfset zombie.save()>
 
 			<!--- users --->
@@ -127,6 +127,26 @@
 				<cfset theage = model("Publisher").new(properties=theageProperties)>
 				<cfset theage.save()>
 
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
 			<cfset kawasaki = model("Customer").new(agencyid=zombie.key(), name="Kawasaki", website="http://www.kawasaki.com.au", phone="(03) 8788 9856", email="mail@kawasaki.com.au", statusid=1, accessLevel=1)>
 			<cfset kawasaki.save()>
 				<!--- publishers --->
@@ -145,22 +165,292 @@
 				<cfset theage = model("Publisher").new(properties=theageProperties)>
 				<cfset theage.save()>
 
-		<!--- campaigns --->
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
 
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
 
-		<!--- assets --->
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
 
 
 		<!--- 
 			** MR BURNS **
 		 --->
-		<cfset burns = model("Agency").new(name="Mr. Burns & Co", streetnumber="10", streetname="Plant Road", suburb="Springfield", phone="(088) 555 4543", email="burnsy@nuclearplant.com").save()>
-		
+		<cfset burns = model("Agency").new(name="Mr. Burns & Co", streetnumber="10", streetname="Plant Road", suburb="Springfield", phone="(088) 555 4543", email="burnsy@nuclearplant.com")>
+		<cfset burns.save()>
+
+		<!--- users --->
+			<cfloop from="1" to="3" index="i">
+				<cfset user[i] = model("User").new(agencyid=burns.key(), firstname=names[i+3], lastname=surnames[i+3], position="Dude", email="#names[i+3]#@nuclearplant.com", password=standardPassword, passwordConfirmation=standardPassword)>
+				<cfset user[i].save()>
+			</cfloop>
+			<!--- customers --->
+			<cfset honda = model("Customer").new(agencyid=burns.key(), name="Honda", website="http://www.honda.com.au", phone="(03) 9545 5434", email="mail@honda.com.au", statusid=1, accessLevel=1)>
+			<cfset honda.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = honda.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = honda.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = honda.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
+			<cfset yamaha = model("Customer").new(agencyid=burns.key(), name="Yamaha", website="http://www.yamaha.com.au", phone="(03) 9834 9321", email="mail@yamaha.com.au", statusid=1, accessLevel=1)>
+			<cfset yamaha.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = yamaha.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = yamaha.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = yamaha.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
+			<cfset kawasaki = model("Customer").new(agencyid=burns.key(), name="Kawasaki", website="http://www.kawasaki.com.au", phone="(03) 8788 9856", email="mail@kawasaki.com.au", statusid=1, accessLevel=1)>
+			<cfset kawasaki.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = kawasaki.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = kawasaki.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = kawasaki.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
 
 		<!--- 
 			** SIX **
 		 --->
-		<cfset six = model("Agency").new(name="Six String Things", streetnumber="Level 3, 6", streetname="Fender Drive", suburb="Nashville", phone="(001) 554 4543", email="six@six.com").save()>
+		<cfset six = model("Agency").new(name="Six String Things", streetnumber="Level 3, 6", streetname="Fender Drive", suburb="Nashville", phone="(001) 554 4543", email="six@six.com")>
+		<cfset six.save()>
+
+		<!--- users --->
+			<cfloop from="1" to="3" index="i">
+				<cfset user[i] = model("User").new(agencyid=six.key(), firstname=names[i+6], lastname=surnames[i+6], position="Dude", email="#names[i]#@six.com", password=standardPassword, passwordConfirmation=standardPassword)>
+				<cfset user[i].save()>
+			</cfloop>
+			<!--- customers --->
+			<cfset honda = model("Customer").new(agencyid=six.key(), name="Honda", website="http://www.honda.com.au", phone="(03) 9545 5434", email="mail@honda.com.au", statusid=1, accessLevel=1)>
+			<cfset honda.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = honda.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = honda.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = honda.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
+			<cfset yamaha = model("Customer").new(agencyid=six.key(), name="Yamaha", website="http://www.yamaha.com.au", phone="(03) 9834 9321", email="mail@yamaha.com.au", statusid=1, accessLevel=1)>
+			<cfset yamaha.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = yamaha.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = yamaha.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = yamaha.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
+			<cfset kawasaki = model("Customer").new(agencyid=six.key(), name="Kawasaki", website="http://www.kawasaki.com.au", phone="(03) 8788 9856", email="mail@kawasaki.com.au", statusid=1, accessLevel=1)>
+			<cfset kawasaki.save()>
+				<!--- publishers --->
+				<cfset facebookProperties = Duplicate(facebookStruct)>
+				<cfset facebookProperties.customerid = kawasaki.key()>
+				<cfset facebook = model("Publisher").new(properties=facebookProperties)>
+				<cfset facebook.save()>
+				
+				<cfset fullnoiseProperties = Duplicate(fullnoiseStruct)>
+				<cfset fullnoiseProperties.customerid = kawasaki.key()>
+				<cfset fullnoise = model("Publisher").new(properties=fullnoiseProperties)>
+				<cfset fullnoise.save()>
+				
+				<cfset theageProperties = Duplicate(theageStruct)>
+				<cfset theageProperties.customerid = kawasaki.key()>
+				<cfset theage = model("Publisher").new(properties=theageProperties)>
+				<cfset theage.save()>
+
+				<!--- campaigns --->
+				<cfset campaignNewThing = model("Campaign").new(name="Win a New Thing", creatoruserid=user[1].key())>
+				<cfset campaignNewThing.save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=facebook.key(), name="FB - Win", destinationurl="www.honda.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=fullnoise.key(), name="Full - Win", destinationurl="www.fullnoise.com.au/win-a-new-thing").save()>
+					<cfset model("Asset").new(campaignid=campaignNewThing.key(), publisherid=theage.key(), name="Age - Win", destinationurl="www.theage.com.au/win-a-new-thing").save()>
+
+				<cfset campaignCashBack = model("Campaign").new(name="$500 Cash Back", creatoruserid=user[2].key())>
+				<cfset campaignCashBack.save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=facebook.key(), name="FB - Cash", destinationurl="www.honda.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=fullnoise.key(), name="Full - Cash", destinationurl="www.fullnoise.com.au/500-cashback").save()>
+					<cfset model("Asset").new(campaignid=campaignCashBack.key(), publisherid=theage.key(), name="Age - Cash", destinationurl="www.theage.com.au/500-cashback").save()>
+
+				<cfset campaignFreeStuff = model("Campaign").new(name="Get Free Stuff", creatoruserid=user[2].key())>
+				<cfset campaignFreeStuff.save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=facebook.key(), name="FB - Free", destinationurl="www.honda.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=fullnoise.key(), name="Full - Free", destinationurl="www.fullnoise.com.au/free-stuff").save()>
+					<cfset model("Asset").new(campaignid=campaignFreeStuff.key(), publisherid=theage.key(), name="Age - Free", destinationurl="www.theage.com.au/free-stuff").save()>
+
+
+		<!--- more agencies..  --->
+		<cfloop from="4" to="10" index="i">
+			<cfset agency = model("Agency").new(name="#names[i]# #alphabet[i]#. #phonetics[i]# Advertising", streetnumber=i * 6, streetname="#surnames[i]# Drive", suburb="#animals[i]# Flats", phone="(00#i#) 55#i# 4543", email="#names[i]#@hotmail.com")>
+			<cfset agency.save()>
+			<cfset model("User").new(agencyid=agency.key(), firstname=names[i+10], lastname=surnames[i+10], position="Dude", email="#names[i+10]#@hotmail.com", password=standardPassword, passwordConfirmation=standardPassword).save()>
+		</cfloop>
+
+		<cfif cgi.HTTP_REFERER IS "">
+			<cfset renderText(linkTo(route="home"))>
+		<cfelse>
+			<cfset flashInsert(message="The database was reset", messageType="success")>
+			<cfset redirectTo(back=true)>
+		</cfif>
 
 	</cffunction>
 
