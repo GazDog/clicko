@@ -27,10 +27,10 @@
 						<tbody>
 							<cfloop query="users">
 								<tr>
-									<td>#users.name#</td>
+									<td>#users.firstname# #users.lastname#</td>
 									<td>#users.email#</td>
-									<td>demo2012</td>
-									<td>#users.admin ? "Admin" : "User"#</td>
+									<td>password123</td>
+									<td>#users.isadministrator ? "Admin" : "User"#</td>
 								</tr>
 							</cfloop>
 						</tbody>
