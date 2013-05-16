@@ -96,7 +96,6 @@
       t.integer(columnNames="publisherid", null=false);
       // t.references("campaigns,publishers");
       t.string(columnNames="name", null=false, limit=64);
-      t.string(columnNames="sourceurl", null=false, limit=128);
       t.string(columnNames="destinationurl", null=false, limit=128);
       t.datetime(columnNames="startat,finishat", null=true);
       t.text(columnNames="notes", null=true);
