@@ -1,43 +1,32 @@
-<h1>Listing agencies</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
-	<p>#linkTo(text="New agency", action="new")#</p>
-</cfoutput>
+	#pageTitle("Agencies")#
 
-<cftable query="agencies" colHeaders="true" HTMLTable="true">
+	#flashMessageTag()#
 	
-			
-				
-					<cfcol header="Id" text="#id#" />
-				
-					<cfcol header="Name" text="#name#" />
-				
-					<cfcol header="Streetnumber" text="#streetnumber#" />
-				
-					<cfcol header="Streetname" text="#streetname#" />
-				
-					<cfcol header="Suburb" text="#suburb#" />
-				
-					<cfcol header="Phone" text="#phone#" />
-				
-					<cfcol header="Email" text="#email#" />
-				
-					<cfcol header="Statusid" text="#statusid#" />
-				
-					<cfcol header="Accesslevel" text="#accesslevel#" />
-				
-					<cfcol header="Createdat" text="#createdat#" />
-				
-					<cfcol header="Updatedat" text="#updatedat#" />
-				
-					<cfcol header="Deletedat" text="#deletedat#" />
-				
-			
-		
-	<cfcol header="" text="#linkTo(text='Show', action='show', key=id)#" />
-	<cfcol header="" text="#linkTo(text='Edit', action='edit', key=id)#" />
-	<cfcol header="" text="#linkTo(text='Delete', action='delete', key=id, confirm='Are you sure?')#" />
-</cftable>
-
+	<p>#linkTo(text="New Agency", action="new", class="btn")#</p>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Address</th>
+				<th>Status</th>
+				<th>Created</th>
+				<th class="span1"></th>
+				<th class="span1"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<cfoutput query="agencies">
+				<tr>
+					<td>#linkTo(text=name, action='show', key=id)#</td>
+					<td>#streetNumber# #streetName#, #suburb#</td>
+					<td>#statusid#</td>
+					<td>#timeAgoInWords(createdAt)# ago</td>
+					<td>#linkTo(text='Edit', action='edit', key=id)#</td>
+					<td>#linkTo(text='Delete', action='delete', key=id, confirm='Are you sure?')#</td>
+				</tr>
+			</cfoutput>
+		</tbody>
+	</table>
+</cfoutput>

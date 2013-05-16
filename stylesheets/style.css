@@ -1,0 +1,139 @@
+body
+{
+    font-size:12px;
+    font-family:Arial, sans-serif;
+	color:#3D3D31;
+}
+a {text-decoration:none;}
+a:hover {text-decoration:underline;color:#0050FF}
+.tiny {font-size:9px;}
+.label {width:150px;text-align:right;padding:2px 8px 2px 0px;}
+.bold {font-weight:bold;}
+.grey {color:gray}
+.red {color:#F85118}
+.green {color:#A0BB4D}
+.orange {color:#F4793A}
+.transparent {opacity:0.5;filter:alpha(opacity=50);}
+
+/* elements */
+.heading {font-family:Verdana,sans-serif;font-size:16px;color:#F4793A;padding:0px 0px 10px 0px;}
+.headingSmall {font-family:Verdana,sans-serif;font-size:12px;color:#F4793A;}
+.headingSecondary {font-family:Verdana,sans-serif;font-size:16px;color:#3D3D31;font-weight:normal;padding:0px 0px 10px 0px;}
+/*.cap {font-size:16px;color:white;background-color:#95B337;font-weight:bold;}*/
+.cap {font-family:Verdana,sans-serif;border: 1px solid #7C962E; background: #95B337 url(/jquery/jquery-ui-1-7-1/themes/bumblebee/images/ui-bg_gloss-wave_55_95B337_500x100.png) 50% 50% repeat-x; color: #ffffff; padding:2px 0px 4px 6px; font-size:14px; font-weight: bold;}
+.topBit {border-bottom: 1px solid #F1F5E2; background: #95B337 url(/jquery/jquery-ui-1-7-1/themes/bumblebee/images/ui-bg_gloss-wave_55_95B337_500x100.png) 50% 50% repeat-x; color: #ffffff; padding:0px 0px 8px 6px; font-size:12px;}
+.topBit a {color: #eeeeee; text-decoration:none;}
+
+/* warning elements */
+.warningCap {font-family:Verdana,sans-serif;border: 1px solid #E39B2F; background: #FFBD5B; color: white; padding:2px 0px 4px 6px; font-size:14px; font-weight: bold;}
+
+/*.sortRow {background-color:#DBE8B5;} */
+.sortRow {background: #DBE8B5 url(/jquery/jquery-ui-1-7-1/themes/bumblebee/images/ui-bg_glass_85_DBE8B5_1x400.png) 50% 50% repeat-x; color: #646451;} 
+.sortRow a {color:#646451}
+/*.container {border:1px solid #E9F0D0;}*/
+.listTable {border:1px solid #E9F0D0;width:100%;margin:0px;}
+.listRow {height:24px;}
+.listRowOff {height:24px;background:#F9FBF2;color:#646451;}
+.listRowOver {background:#F9FBF2;}
+.toolBar {padding:0px 0px 8px 0px;}
+.hGradient {background: silver;filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=silver, endColorstr=white)}
+.link {text-decoration:underline;cursor:pointer;}
+.errorBox {font-weight:bold;}
+.successMessage {
+    padding:3px 20px 3px 20px;
+    white-space:nowrap;
+	background: white;
+    border: 1px solid #A1BB4E;
+    color: #3D3D31;
+    margin: 0px;
+}
+/* this was for flashes.. but only use sucess for those (or errors)
+.infoMessage {
+	padding:3px 20px 3px 20px;
+    white-space:nowrap;
+	background: white;
+    border: 1px solid #A1BB4E;
+    color: #3D3D31;
+    margin: 0px;
+}
+*/
+.infoMessage {
+	margin-bottom: 10px;
+    padding: 6px 6px 6px 10px;
+	background: #FCFDFD;
+    border: 1px solid #A1BB4E;
+    color: #3D3D31;
+    line-height:1.5em;
+}
+.warningMessage {
+	margin-bottom: 10px;
+    padding: 6px 6px 6px 10px;
+	background: #FCFDFD;
+    border: 1px solid #FA9300;
+    color: #3D3D31;
+    line-height:1.5em;
+}
+.errorMessages, .errorMessage {
+	margin-bottom: 10px;
+    padding: 6px 6px 6px 30px;
+	background: #FEF1EC;
+    border: 1px solid #CD0A0A;
+    color: #CD0A0A;
+    list-style-type:decimal;
+    line-height:1.5em;
+}
+.borderBottom {border-bottom:1px solid #E9F0D0;}
+.tool {text-decoration:none;cursor:pointer;}
+.toolPipe {color:silver;}
+.toolOptionDiv {white-space:nowrap;display:none;padding:6px;background-color:white;position:absolute;z-index:1000;border-style:solid;border-color:gray;border-width: 1px 3px 3px 1px;}
+.toolOptionOver {color:#A0BB4D}
+.vtop {vertical-align:top;padding-top:2px;}
+.center {text-align:center;}
+.chevron {font-size:9px;}
+.pointer {cursor:pointer;}
+/* page numbers */
+.pnHref {text-decoration:none;color:#3D3D31;}
+.pnOff {border:1px solid #DBE8B5;padding:0px 6px 0px 6px;}
+.pnOn {border:1px solid #F4793A;padding:0px 6px 0px 6px;text-decoration:none;cursor:pointer;}
+.pnOver {background: #E7F0CE; color: #646451; border:1px solid #A2BD50;}
+
+/* menu */
+
+/* for zebra stripes */
+tr.alt td { background: #F3F3F3; }
+tr.over td  { background: #F4F8E9; }
+
+/* forms */
+.formHeading {padding-right:8px;font-size:16px;font-weight:normal;color:#F4793A;padding:0px 0px 10px 0px;}
+.formLabel {width:150px;text-align:right;padding-right:8px;height:30px;white-space:nowrap;}
+
+form {margin:0px;}
+input[type="text"] {width:200px;}
+/*select {width:200px;}*/
+textarea {width:300px;height:100px;font-size:12px;font-family:Arial,sans-serif;}
+label.validateErrorClass {color:red; margin-left:6px;}
+input.validateErrorClass, textarea.validateErrorClass {border: 1px solid red;}
+/*links to look like buttons*/
+a.button {height:18px;display: block;font-size: 13px;text-align: center;color: black;padding-top:2px;text-decoration: none;background-color: #EBEBEB;border:1px solid #707070;-moz-border-radius:3px; border-radius:3px;}
+
+div.formLayout input, div.formLayout textarea, div.formLayout select
+{
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+}
+div.formLayout label, label.formLayout
+{
+	display: block;
+    width: 150px;
+    float: left;
+    margin-bottom: 10px;
+    text-align: right;
+    padding-right: 10px;
+}
+div.formLayout input[type='submit'], div.formLayout button
+{
+	display: block;
+    margin-left: 160px;
+}
+div.formLayout br, br.formLayout {clear: left;}

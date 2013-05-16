@@ -1,0 +1,57 @@
+/*
+ * Valkyrie styles
+ * ------------------------------------------------------------------------------------------- */
+
+body {
+  color: @grayDark;
+}
+
+// Unique column sizes for 16-column grid
+.span-entire     { .columns(12); }
+.span-half     { .columns(6); }
+
+// Actions (the buttons) not for forms..
+.actions-noform {
+  background: #f5f5f5;
+  margin-top: @baseline;
+  margin-bottom: @baseline;
+  padding: (@baseline - 1) 20px @baseline 10px;
+  border-top: 1px solid #ddd;
+  .border-radius(0 0 3px 3px);
+  .secondary-action {
+    float: right;
+    a {
+      line-height: 30px;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+// a box to put things in
+.box {
+	background: @grayLighter;
+  	margin-bottom: @baseline;
+  	padding: (@baseline - 1) 20px @baseline 10px;
+  	border: 1px solid @baseBorderColor;
+  	.border-radius(3px);
+}
+
+.cap {
+	background: @grayLight;
+  	padding: (@baseline - 10) 20px (@baseline - 8) 10px;
+  	border-left: 1px solid @baseBorderColor;
+  	border-top: 1px solid @baseBorderColor;
+  	border-right: 1px solid @baseBorderColor;
+  	.border-radius(3px 3px 0 0);
+  	font-weight: bold;
+}
+.box-with-cap {
+	background: @grayLighter;
+  	margin-bottom: @baseline;
+  	padding: (@baseline - 1) 20px @baseline 10px;
+  	border: 1px solid @baseBorderColor;
+  	.border-radius(0 0 3px 3px);
+}
+

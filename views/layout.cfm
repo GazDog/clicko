@@ -1,4 +1,13 @@
-<!DOCTYPE html>
+<cfoutput>
+	#includePartial("/layouts/open")#
+	#includePartial("/layouts/bar")#
+	<div class="container">
+		#includeContent()# 
+		#includePartial("/layouts/footer")#
+	</div>
+	#includePartial("/layouts/close")#
+</cfoutput>
+<!--- <!DOCTYPE html>
 <html><cfoutput>
 
 	<head>
@@ -45,4 +54,4 @@
 		</div>
 	</body>
 
-</cfoutput></html>
+</cfoutput></html> --->

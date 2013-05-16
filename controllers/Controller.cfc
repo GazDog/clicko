@@ -26,7 +26,7 @@ component
 	private void function isAuthenticated() {
 		if ( ! signedIn() ) {
 			storeLocation(params);
-			redirectTo(route="signIn");	
+			redirectTo(route="admin");	
 		}
 	}
 
