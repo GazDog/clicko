@@ -108,7 +108,6 @@
       t.integer(columnNames="assetid", null=false);
       t.string(columnNames="ipaddress", null=false, limit=32);
       t.string(columnNames="browser", null=false, limit=32);
-      t.string(columnNames="browserversion", null=false, limit=16);
       t.datetime(columnNames="createdat", null=true);
       t.create();
 
