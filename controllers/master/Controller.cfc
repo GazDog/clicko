@@ -17,7 +17,7 @@ component
 	 * @hint Ensures user is an admin.
 	 */
 	private void function isAdministrator() {
-		if ( ! currentUser.admin ) {
+		if ( ! currentUser.isAdministrator ) {
 			redirectTo(route="home", message="Unathorized!", messageType="error");	
 		}
 	}

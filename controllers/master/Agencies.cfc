@@ -1,5 +1,9 @@
 <cfcomponent extends="Controller" output="false">
 	
+	<cffunction name="init">
+		<cfset super.init()>
+	</cffunction>
+
 	<!--- agencies/index --->
 	<cffunction name="index">
 		<cfset agencies = model("Agency").findAll()>
