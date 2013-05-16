@@ -5,8 +5,6 @@
 
 <p>This plugin will enable Scaffolding in your application, to use it, follow the instructions below.</p>
 
-<p><tt>Note:</tt> the flash messages aren't displayed in the views unless you either make a bit of logic to display the correct one, or use the "flashMessages()" method to quickly dump your flash messages.</p>
-
 <h2>Instructions</h2>
 
 <ul>
@@ -19,32 +17,34 @@
 <h2>Generate form</h2>
 
 <cfif isDefined("FORM.objectToScaffold") AND isDefined("FORM.typeOfScaffold")>
-    
+
+	<!--- default overwrite checkbox --->
+	<cfparam name="FORM.overwrite" default="0">
+
     <cfoutput>
-    	<p><tt>#generateScaffold(FORM.objectToScaffold, FORM.typeOfScaffold, FORM.template)#</tt></p>
+    	<p><tt>#generateScaffold(FORM.objectToScaffold, FORM.typeOfScaffold, FORM.template, FORM.overwrite)#</tt></p>
     </cfoutput>
     
     <p>Create another one?</p>
-    
-<cfelse>
 
-	<p><tt>Example: If your table is named "users", insert "user" in the form field below.</tt></p>
-    
 </cfif>
+
+<p><tt>Example: If your table is named "users", insert "user" in the form field below.</tt></p>
 
 <!--- Form --->
 <cfform action="#CGI.script_name & '?' & CGI.query_string#">
 	<p><label for="objectToScaffold">Object name</label> <br>
 	<cfinput type="text" name="objectToScaffold" required="true"  message="An Object name is required"></p>
 	
-	<p><label for="typeOfScaffold">Type</label> <br>
-	<cfselect name="typeOfScaffold" required="true" message="A Type is required">
-		<option value="everything" selected="selected">Model, Views and Controller</option>
-		<option value="model_controller" selected="selected">Model and Controller</option>
-		<option value="controller">Controller</option>
-		<option value="view">View</option>
-		<option value="model">Model</option>
-	</cfselect>
+	<p><label for="typeOfScaffold">MVC</label><br>
+		<cfinput type="checkbox" id="modelMVC" name="typeOfScaffold" value="model" required="true" checked="true"> <label for="modelMVC">Model</label><br>
+		<cfinput type="checkbox" name="typeOfScaffold" id="viewMVC" value="view" required="true" checked="true" label="View"> <label for="viewMVC">View</label><br>
+		<cfinput type="checkbox" name="typeOfScaffold" id="controllerMVC" value="controller" required="true" checked="true" label="Controller">  <label for="controllerMVC">Controller</label><br>
+	</p>
+
+	<p><label for="typeOfScaffold">Tests</label><br>
+		<cfinput type="checkbox" name="typeOfScaffold" id="modelTest" value="modelTest" required="true" checked="true"> <label for="modelTest">Model</label><br>
+		<cfinput type="checkbox" name="typeOfScaffold" id="controllerTest" value="controllerTest" required="true" checked="true" label="Controller"> <label for="controllerTest">Controller</label><br>
 	</p>
 	
 	<p>
@@ -56,8 +56,12 @@
 	            </cfif>
 	        </cfoutput>
     	</cfselect>
-	</p>	
+	</p>
 	
+	<p>
+		<cfinput type="checkbox" name="overwrite" id="overwrite" value="1" checked="false"> <label for="overwrite">Overwrite Existing?</label><br>
+	</p>
+
 	<p><cfinput type="submit" name="btnSubmit" value="Generate"></p>
 	
 </cfform>
