@@ -22,8 +22,8 @@
 			<div class="fill">
 				<div class="container">
 					<ul class="nav">
-						<li>#linkTo(route="home", class="brand", text="User Manager")#</li>
-						<li>#linkTo(text="Home", route="home")#</li>
+						<!--- <li>#linkTo(route="home", class="brand", text="User Manager")#</li>
+						<li>#linkTo(text="Home", route="home")#</li> --->
 						<li>#linkTo(text="Users", controller="users", action="index")#</li>
 						<cfif signedIn() AND currentUser.admin>
 							<li>#linkTo(text="Admin", controller="admin", action="index")#</li>
@@ -33,11 +33,11 @@
 						<cfif signedIn()>
 							<li><a>#currentUser.name#</a></li>
 							<li><a>|</a></li>
-							<li>#linkTo(text="Profile", route="profile", key=currentUser.id)#</li>
-							<li>#linkTo(text="Sign out", route="signOut")#</li>
+							<!--- <li>#linkTo(text="Profile", route="profile", key=currentUser.id)#</li> --->
+							<li>#linkTo(text="Logout", route="logout")#</li>
 						<cfelse>
-							<li>#linkTo(text="Sign Up", route="signUp")#</li>
-							<li>#linkTo(text="Sign in", route="signIn")#</li>
+							<!--- <li>#linkTo(text="Sign Up", route="signUp")#</li>
+							<li>#linkTo(text="Sign in", route="signIn")#</li> --->
 						</cfif>
 					</ul>
 				</div>

@@ -1,6 +1,6 @@
 component
-	extends="Admin"
-	hint="AdminUsers controller."
+	extends="Controller"
+	hint="Administrator Users controller."
 {
 	/**
 	 * @hint Constructor.

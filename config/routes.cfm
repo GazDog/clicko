@@ -1,10 +1,61 @@
 <cfscript>
+drawRoutes()
+	
+	// master admin
+    .namespace("master")
+    	// Administrators
+        .controller("Administrators")
+            .get("new")
+            .post("create")
+            .get(name="show", pattern="show/[key]")
+            .get(name="edit", pattern="edit/[key]")
+            .post(name="update", pattern="update/[key]")
+            .get(name="delete", pattern="delete/[key]")
+            .root(action="index")
+        .end()
+         // Agencies
+        .controller("Agencies")
+            .get("new")
+            .post("create")
+            .get(name="show", pattern="show/[key]")
+            .get(name="edit", pattern="edit/[key]")
+            .post(name="update", pattern="update/[key]")
+            .get(name="delete", pattern="delete/[key]")
+            .root(action="index")
+        .end()
+    .end()
 
-	addRoute(name="profile", pattern="/profile/[key]", controller="users", action="show");
-	addRoute(name="signOut", pattern="/signout", controller="sessions", action="delete");
-	addRoute(name="signIn", pattern="/signin", controller="sessions", action="new");
-	addRoute(name="signUp", pattern="/signup", controller="users", action="new");
+    // administration side
+    .namespace("admin")
+		// Ajax
+    	.controller("ajax")
+            .get("search")
+        .end()
+        // Users
+        .controller("Users")
+            .get("new")
+            .post("create")
+            .get(name="show", pattern="show/[key]")
+            .get(name="edit", pattern="edit/[key]")
+            .post(name="update", pattern="update/[key]")
+            .get(name="delete", pattern="delete/[key]")
+            .root(action="index")
+        .end()
+        // Dashboard
+        .controller("Dash")
+            .root(action="index")
+        .end()
+    .end()
 
-	addRoute(name="home", pattern="", controller="pages", action="index");
+	// login
+	.get(name="logOut", pattern="/logOut", controller="login", action="delete")
+	.get(name="admin", pattern="/admin", controller="login", action="new")
 
+	// engine
+	.get(name="engine", pattern="/l/[key]", controller="engine", action="index")
+
+    // default routes
+    .wildcard()
+    .root(to="pages##index")
+.end();
 </cfscript>

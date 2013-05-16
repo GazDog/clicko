@@ -1,13 +1,13 @@
 component
-	extends="Controller"
-	hint="Base admin controller."
+	extends="clicko.controllers.Controller"
+	hint="Base master controller."
 {
 	/**
 	 * @hint Constructor.
 	 */
 	public void function init() {
 		super.init();
-		filters(through="isAuthenticated,isAdmin");
+		filters(through="isAuthenticated,isAdministrator");
 	}
 
 	// --------------------------------------------------
@@ -16,17 +16,9 @@ component
 	/*
 	 * @hint Ensures user is an admin.
 	 */
-	private void function isAdmin() {
+	private void function isAdministrator() {
 		if ( ! currentUser.admin ) {
 			redirectTo(route="home", message="Unathorized!", messageType="error");	
 		}
 	}
-
-	// --------------------------------------------------
-	// Public
-
-	/**
-	 * @hint Renders the index page.
-	 */
-	public void function index() {}
 }
