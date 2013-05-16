@@ -25,13 +25,13 @@
 						<!--- <li>#linkTo(route="home", class="brand", text="User Manager")#</li>
 						<li>#linkTo(text="Home", route="home")#</li> --->
 						<li>#linkTo(text="Users", controller="users", action="index")#</li>
-						<cfif signedIn() AND currentUser.admin>
+						<cfif signedIn() AND currentUser.isAdministrator>
 							<li>#linkTo(text="Admin", controller="admin", action="index")#</li>
 						</cfif>
 					</ul>
 					<ul class="nav secondary-nav">
 						<cfif signedIn()>
-							<li><a>#currentUser.name#</a></li>
+							<li><a>#currentUser.firstName#</a></li>
 							<li><a>|</a></li>
 							<!--- <li>#linkTo(text="Profile", route="profile", key=currentUser.id)#</li> --->
 							<li>#linkTo(text="Logout", route="logout")#</li>

@@ -10,7 +10,7 @@
 			<div class="span7">
 				#flashMessageTag()#
 				<p>Assuming you created the data source and the database using the provided SQL file, see the users table accross for usage details.</p>
-				<p>#linkTo(text="Sign in", route="signIn", class="btn primary")# &nbsp; #linkTo(text="Sign Up", route="signUp", class="btn danger")#</p>
+				<p>#linkTo(text="Sign in", route="admin", class="btn primary")#</p>
 			</div>
 			<div class="span9">
 				<div class="well">

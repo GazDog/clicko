@@ -29,7 +29,7 @@ component
 		}
 		else {
 			signIn(user);
-			redirectBackOr(controller="users", action="index");
+			redirectBackOr(controller="#currentUser().isAdministrator ? 'master' : 'admin'#.dash", action="index");
 		}
 	}
 
