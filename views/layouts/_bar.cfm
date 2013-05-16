@@ -100,7 +100,7 @@
 						<a href="##" class="dropdown-toggle" data-toggle="dropdown">#currentUser.firstName#<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<!--- <li>#linkTo(controller="admin.people", action="edit", key=res.me.id, text="Edit Profile")#</li> --->
-							<li>#linkTo(controller="admin.login", action="logout", text="Log out", params="clear=true")#</li>
+							<li>#linkTo(route="logout", text="Log out", params="clear=true")#</li>
 						</ul>
 					</li>
 				</ul>
