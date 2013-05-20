@@ -1,6 +1,9 @@
 <cfoutput>
 	#includePartial("/layouts/open")#
 	#includePartial("/layouts/bar")#
+	<div class="container" id="flashContainer" align="center">
+		#flashMessageTag()#
+	</div>
 	<div class="container">
 		#includeContent()# 
 		#includePartial("/layouts/footer")#

@@ -29,7 +29,7 @@ component
 		}
 		else {
 			signIn(user);
-			redirectBackOr(controller="#currentUser().isAdministrator ? 'master' : 'admin'#.dash", action="index");
+			redirectBackOr(controller="#adminNamespace(currentUser())#.dash", action="index");
 		}
 	}
 
@@ -38,6 +38,6 @@ component
 	 */
 	public void function delete() {
 		signOut();
-		redirectTo(route="home");
+		redirectTo(route="admin");
 	}
 }

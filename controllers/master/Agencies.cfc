@@ -2,6 +2,7 @@
 	
 	<cffunction name="init">
 		<cfset super.init()>
+		<cfset filters(through="formDataFunction", only="new,edit,create,update")>
 	</cffunction>
 
 	<!--- agencies/index --->
@@ -17,7 +18,7 @@
     	
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(agency)>
-	        <cfset flashInsert(error="Agency #params.key# was not found")>
+	        <cfset flashInsert(message="Agency #params.key# was not found", messageType="error")>
 	        <cfreturn redirectTo(action="index", delay=true)>
 	    </cfif>
 			
@@ -36,7 +37,7 @@
     	
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(agency)>
-	        <cfset flashInsert(error="Agency #params.key# was not found")>
+	        <cfset flashInsert(message="Agency #params.key# was not found", messageType="error")>
 			<cfreturn redirectTo(action="index", delay=true)>
 	    </cfif>
 		
@@ -48,11 +49,11 @@
 		
 		<!--- Verify that the agency creates successfully --->
 		<cfif agency.save()>
-			<cfset flashInsert(success="The agency was created successfully.")>
+			<cfset flashInsert(message="#agency.name# was created successfully.", messageType="success")>
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error creating the agency.")>
+			<cfset flashInsert(message="There was an error creating the agency.", messageType="error")>
 			<cfset renderPage(action="new")>
 		</cfif>
 	</cffunction>
@@ -63,11 +64,11 @@
 		
 		<!--- Verify that the agency updates successfully --->
 		<cfif agency.update(params.agency)>
-			<cfset flashInsert(success="The agency was updated successfully.")>	
+			<cfset flashInsert(message="#agency.name# was updated successfully.", messageType="success")>	
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error updating the agency.")>
+			<cfset flashInsert(message="There was an error updating the agency.", messageType="error")>
 			<cfset renderPage(action="edit")>
 		</cfif>
 	</cffunction>
@@ -78,13 +79,29 @@
 		
 		<!--- Verify that the agency deletes successfully --->
 		<cfif agency.delete()>
-			<cfset flashInsert(success="The agency was deleted successfully.")>	
+			<cfset flashInsert(message="#agency.name# was deleted successfully.", messageType="success")>	
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error deleting the agency.")>
+			<cfset flashInsert(message="There was an error deleting the agency.", messageType="error")>
 			<cfreturn redirectTo(action="index", delay=true)>
 		</cfif>
 	</cffunction>
 	
+	<!--- TODO: this is a fudge as tge automatic data function is not working.. --->
+	<cffunction name="formDataFunction" access="private">
+		<cfset accessLevels = []>
+		<cfset ArrayAppend(accessLevels, {value="0", text="Single Customer"})>
+		<!--- <cfset ArrayAppend(accessLevels, {value="1", text="5 Customers"})> --->
+		<cfset ArrayAppend(accessLevels, {value="2", text="Unlimited Customers"})>
+	</cffunction>
+
+	<!--- <cffunction name="form" access="private" returntype="struct">
+		<cfset accessLevels = []>
+		<cfset ArrayAppend(accessLevels, {value="0", text="Single Customer"})>
+		<cfset ArrayAppend(accessLevels, {value="1", text="5 Customers"})>
+		<cfset ArrayAppend(accessLevels, {value="2", text="Unlimited Customers"})>
+		<cfreturn {}>
+	</cffunction> --->
+
 </cfcomponent>

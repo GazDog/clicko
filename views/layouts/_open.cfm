@@ -26,11 +26,16 @@
 			
 			<style>
 				body { padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */ } 
+				##flashContainer {position:fixed; top:40px; width:100%;}
 			</style>
 			
 			<script>
 				$(window).load(function() {	
-					
+					<!--- hide success messages --->
+					var hideSuccess = function() {
+						$("##flashContainer div.alert-success, ##flashContainer div.alert-info").slideUp();
+					}
+					setTimeout(hideSuccess,5000);
 				});
 			</script>
 

@@ -64,48 +64,23 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			#linkTo(controller="admin.dashboard", action="index", text=get("appName"), class="brand")#
-			<cfif signedIn() AND params.controller neq "admin.login">
+			#linkTo(controller="#adminNamespace(currentUser)#.dash", action="index", text=get("appName"), class="brand")#
 			<div class="nav-collapse">
-				<ul class="nav">
-					
-					<li>#linkTo(controller="admin.dashboard", action="index", text="Dashboard")#</li>
-					
-					<li class="dropdown">
-						<a href="##" class="dropdown-toggle" data-toggle="dropdown">Add<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li>#linkTo(controller="admin.pages", action="newOne", text="Page")#</li>
-							<li>#linkTo(controller="admin.items", action="new", text="Item")#</li>
-						</ul>
-					</li>
-					<li class="dropdown">
-						<a href="##" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<li>#linkTo(controller="admin.site", action="edit", text="Site")#</li>
-							<li>#linkTo(controller="admin.pages", action="index", text="Pages")#</li>
-							<li>#linkTo(controller="admin.items", action="index", text="Items")#</li>
-							<li>#linkTo(controller="admin.menuLinks", action="index", text="Menu")#</li>
-							<li>#linkTo(controller="admin.categories", action="index", text="Categories")#</li>
-							<li>#linkTo(controller="admin.attributeOptions", action="index", text="Attributes")#</li>
-							<li>#linkTo(controller="admin.people", action="index", text="Users")#</li>
-							<li>#linkTo(controller="admin.contacts", action="index", text="Contacts")#</li>
-						</ul>
-					</li>
-				</ul>
-				<form class="navbar-search pull-left">
-				  <input type="text" class="search-query" id="search" placeholder="Search">
-				</form>
+				<cfif currentUser.isAdministrator>
+					#includePartial("/layouts/masterMenu.cfm")#
+				<cfelse>
+					#includePartial("/layouts/adminMenu.cfm")#
+				</cfif>
 				<ul class="nav pull-right">
 					<li class="dropdown">
 						<a href="##" class="dropdown-toggle" data-toggle="dropdown">#currentUser.firstName#<b class="caret"></b></a>
 						<ul class="dropdown-menu">
 							<!--- <li>#linkTo(controller="admin.people", action="edit", key=res.me.id, text="Edit Profile")#</li> --->
-							<li>#linkTo(route="logout", text="Log out", params="clear=true")#</li>
+							<li>#linkTo(route="logout", text="Log out")#</li>
 						</ul>
 					</li>
 				</ul>
 			</div>
-			</cfif>
 		</div>
 	</div>
 </div>

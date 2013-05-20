@@ -96,11 +96,12 @@ drawRoutes()
     .end()
 
 	// login
-	.get(name="logOut", pattern="/logOut", controller="login", action="delete")
+	.get(name="logout", pattern="/logOut", controller="login", action="delete")
 	.get(name="admin", pattern="/admin", controller="login", action="new")
 
 	// engine
-	.get(name="engine", pattern="/l/[key]", controller="engine", action="index")
+	.get(name="engineShort", pattern="/l/[key]", controller="engine", action="index")
+    .get(name="engineSlug", pattern="/l/[key]/[slug]", controller="engine", action="index")
 
     // default routes
     .wildcard()

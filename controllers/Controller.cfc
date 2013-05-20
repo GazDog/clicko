@@ -44,6 +44,6 @@ component
 	 * @hint Redirects the user away if its logged in.
 	 */
 	private void function redirectIfLoggedIn() {
-		if ( signedIn() ) redirectTo(controller="users", action="index");
+		if ( signedIn() ) redirectTo(controller="#adminNamespace(currentUser())#.dash", action="index");
 	}
 }

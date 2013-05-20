@@ -1,62 +1,23 @@
-<h1>Create a New agency</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Add Agency')#
 			
-			
-			#errorMessagesFor("agency")#
+	#errorMessagesFor("agency")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="create")#
+				<fieldset>
 		
-				
-																
-				
-					
-						#textField(objectName='agency', property='name', label='Name')#
-																
-				
-					
-						#textField(objectName='agency', property='streetnumber', label='Streetnumber')#
-																
-				
-					
-						#textField(objectName='agency', property='streetname', label='Streetname')#
-																
-				
-					
-						#textField(objectName='agency', property='suburb', label='Suburb')#
-																
-				
-					
-						#textField(objectName='agency', property='phone', label='Phone')#
-																
-				
-					
-						#textField(objectName='agency', property='email', label='Email')#
-																
-				
-					
-						#textField(objectName='agency', property='statusid', label='Statusid')#
-																
-				
-					
-						#textField(objectName='agency', property='accesslevel', label='Accesslevel')#
-																
-				
-																
-				
-																
-				
-																
-				
+					#includePartial("form")#
 
-				#submitTag()#
-				
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
 			#endFormTag()#
-			
-		
+		</div>		
+	</div>		
 
-#linkTo(text="Return to the listing", action="index")#
 </cfoutput>

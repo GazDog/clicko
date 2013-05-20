@@ -1,63 +1,86 @@
-component
-	extends="Controller"
-	hint="Administrator Users controller."
-{
-	/**
-	 * @hint Constructor.
-	 */
-	public void function init() {
-		super.init();
-	}
-
-	// --------------------------------------------------
-	// RESTful
-
-	/**
-	 * @hint Renders the index page.
-	 */
-	public void function index() {
-		users = model("user").findAll();
-	}
+<cfcomponent extends="Controller" output="false">
 	
-	/**
-	 * @hint Renders the user page.
-	 */
-	public void function show() {
-		user = model("user").findByKey(params.key);
-	}
-
-	/**
-	 * @hint Renders the user page.
-	 */
-	public void function delete() {
-		user = model("user").findByKey(params.key);
-		user.delete();
-		redirectTo(action="index", message="#user.name# was deleted successfully.", messageType="success");
-	}
-
-	// --------------------------------------------------
-	// Non RESTful actions
-
-	/**
-	 * @hint Deletes users marked for deletion using a checkbox.
-	 */
-	public void function deleteByCheckBox() {
-		if ( StructKeyExists(params, "delete") ) {
-			model("user").deleteAll(where="id IN(#params.delete#)");
-			flashInsert(message="The selected users were deleted successfully.", messageType="success");	
-		}
-		redirectTo(action="index");
-	}
-
-	// --------------------------------------------------
-	// Private
-
-	/*
-	 * @hint Override the renderPage() method.
-	 * This means we don't have to call a custom renderPage() with a named template in each action.
-	 * Remember the adminusers folder is nested inside the admin folder.
-	 */
-	private void function renderPage() {
-		super.renderPage(template="/admin/#params.controller#/#params.action#", argumentCollection=arguments);
-	}
-}
+	<!--- users/index --->
+	<cffunction name="index">
+		<cfset users = model("User").findAll(where="isAdministrator = 1")>
+	</cffunction>
+	
+	<!--- users/show/key --->
+	<cffunction name="show">
+		
+		<!--- Find the record --->
+    	<cfset user = model("User").findByKey(params.key)>
+    	
+    	<!--- Check if the record exists --->
+	    <cfif NOT IsObject(user)>
+	        <cfset flashInsert(message="User #params.key# was not found", messageType="error")>
+	        <cfreturn redirectTo(action="index", delay=true)>
+	    </cfif>
+			
+	</cffunction>
+	
+	<!--- users/new --->
+	<cffunction name="new">
+		<cfset user = model("User").new()>
+	</cffunction>
+	
+	<!--- users/edit/key --->
+	<cffunction name="edit">
+	
+		<!--- Find the record --->
+    	<cfset user = model("User").findByKey(params.key)>
+    	
+    	<!--- Check if the record exists --->
+	    <cfif NOT IsObject(user)>
+	        <cfset flashInsert(message="User #params.key# was not found", messageType="error")>
+			<cfreturn redirectTo(action="index", delay=true)>
+	    </cfif>
+		
+	</cffunction>
+	
+	<!--- users/create --->
+	<cffunction name="create">
+		<cfset user = model("User").new(params.user)>
+		
+		<!--- Verify that the user creates successfully --->
+		<cfif user.save()>
+			<cfset flashInsert(message="The user was created successfully.", messageType="success")>
+            <cfreturn redirectTo(action="index", delay=true)>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(message="There was an error creating the user.", messageType="error")>
+			<cfset renderPage(action="new")>
+		</cfif>
+	</cffunction>
+	
+	<!--- users/update --->
+	<cffunction name="update">
+		<cfset user = model("User").findByKey(params.key)>
+		
+		<!--- Verify that the user updates successfully --->
+		<cfif user.update(params.user)>
+			<cfset flashInsert(message="The user was updated successfully.", messageType="success")>	
+            <cfreturn redirectTo(action="index", delay=true)>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(message="There was an error updating the user.", messageType="error")>
+			<cfset renderPage(action="edit")>
+		</cfif>
+	</cffunction>
+	
+	<!--- users/delete/key --->
+	<cffunction name="delete">
+		<cfset user = model("User").findByKey(params.key)>
+		
+		<!--- Verify that the user deletes successfully --->
+		<cfif user.delete()>
+			<cfset flashInsert(message="The user was deleted successfully.", messageType="success")>	
+            <cfreturn redirectTo(action="index", delay=true)>
+		<!--- Otherwise --->
+		<cfelse>
+			<cfset flashInsert(message="There was an error deleting the user.", messageType="error")>
+			<cfreturn redirectTo(action="index", delay=true)>
+		</cfif>
+	</cffunction>
+	
+</cfcomponent>

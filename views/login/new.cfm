@@ -53,9 +53,9 @@
 
 			<div class="span7 offset1">
 				<h3>Trouble signing in?</h3>
-				<p>Please restart your browser. If that does not work, send an email to #mailTo(emailAddress="password@myapp.com", encode=true)#.</p>
-				<h3>Don't have an account?</h3>
-				<p>#linkTo(text="Sign up", controller="users", action="new")# to get started.</p>							
+				<p>Please restart your browser. If that does not work, send an email to #mailTo(emailAddress="support@#LCase(get('appName'))#.com", encode=true)#</p>
+				<!--- <h3>Don't have an account?</h3>
+				<p>#linkTo(text="Sign up", controller="users", action="new")# to get started.</p> --->							
 			</div>
 		</div>
 	</div>
