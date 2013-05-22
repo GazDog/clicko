@@ -63,7 +63,6 @@
       t.string(columnNames="phone", null=true, limit=16);
       t.string(columnNames="email", null=true, limit=64);
       t.integer(columnNames="statusid", null=false, default=1);
-      t.integer(columnNames="accesslevel", null=false, default=1);
       t.timestamps();
       t.create();
 

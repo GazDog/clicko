@@ -1,94 +1,23 @@
-<h1>Create a New user</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Add Administrator')#
 			
-			
-			#errorMessagesFor("user")#
+	#errorMessagesFor("user")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="create")#
+				<fieldset>
 		
-				
-																
-				
-					
-						#textField(objectName='user', property='agencyid', label='Agencyid')#
-																
-				
-					
-						#checkBox(objectName='user', property='isadministrator', label='Isadministrator')#
-																
-				
-					
-						#textField(objectName='user', property='firstname', label='Firstname')#
-																
-				
-					
-						#textField(objectName='user', property='lastname', label='Lastname')#
-																
-				
-					
-						#textField(objectName='user', property='phone', label='Phone')#
-																
-				
-					
-						#textField(objectName='user', property='email', label='Email')#
-																
-				
-					
-						#textField(objectName='user', property='accesslevel', label='Accesslevel')#
-																
-				
-					
-						#textField(objectName='user', property='statusid', label='Statusid')#
-																
-				
-					
-						#textField(objectName='user', property='password', label='Password')#
-																
-				
-					
-						#textField(objectName='user', property='salt', label='Salt')#
-																
-				
-					
-						#textField(objectName='user', property='passwordresettoken', label='Passwordresettoken')#
-																
-				
-					
-						#dateTimeSelect(objectName='user', property='passwordresetat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Passwordresetat')#
-																
-				
-					
-						#checkBox(objectName='user', property='isconfirmed', label='Isconfirmed')#
-																
-				
-					
-						#textField(objectName='user', property='emailconfirmationtoken', label='Emailconfirmationtoken')#
-																
-				
-					
-						#dateTimeSelect(objectName='user', property='lastloginat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Lastloginat')#
-																
-				
-					
-						#textField(objectName='user', property='logincount', label='Logincount')#
-																
-				
-																
-				
-																
-				
-																
-				
+					#includePartial("form")#
 
-				#submitTag()#
-				
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
 			#endFormTag()#
-			
-		
+		</div>		
+	</div>		
 
-#linkTo(text="Return to the listing", action="index")#
 </cfoutput>

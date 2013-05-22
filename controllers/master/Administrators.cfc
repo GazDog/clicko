@@ -41,13 +41,15 @@
 	<!--- users/create --->
 	<cffunction name="create">
 		<cfset user = model("User").new(params.user)>
-		
+		<cfset user.isAdministrator = true>
+
 		<!--- Verify that the user creates successfully --->
 		<cfif user.save()>
 			<cfset flashInsert(message="The user was created successfully.", messageType="success")>
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
+			<cfset user.passwordToBlank()>
 			<cfset flashInsert(message="There was an error creating the user.", messageType="error")>
 			<cfset renderPage(action="new")>
 		</cfif>
@@ -63,6 +65,7 @@
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
+			<cfset user.passwordToBlank()>
 			<cfset flashInsert(message="There was an error updating the user.", messageType="error")>
 			<cfset renderPage(action="edit")>
 		</cfif>

@@ -1,8 +1,12 @@
 <cfcomponent extends="Controller" output="false">
 	
+	<cffunction name="init">
+		
+	</cffunction>
+
 	<!--- publishers/index --->
 	<cffunction name="index">
-		<cfset publishers = model("Publisher").findAll()>
+		<cfset publishers = model("Publisher").findAll(include="customer(agency)")>
 	</cffunction>
 	
 	<!--- publishers/show/key --->

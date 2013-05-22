@@ -64,23 +64,27 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</a>
-			#linkTo(controller="#adminNamespace(currentUser)#.dash", action="index", text=get("appName"), class="brand")#
-			<div class="nav-collapse">
-				<cfif currentUser.isAdministrator>
-					#includePartial("/layouts/masterMenu.cfm")#
-				<cfelse>
-					#includePartial("/layouts/adminMenu.cfm")#
-				</cfif>
-				<ul class="nav pull-right">
-					<li class="dropdown">
-						<a href="##" class="dropdown-toggle" data-toggle="dropdown">#currentUser.firstName#<b class="caret"></b></a>
-						<ul class="dropdown-menu">
-							<!--- <li>#linkTo(controller="admin.people", action="edit", key=res.me.id, text="Edit Profile")#</li> --->
-							<li>#linkTo(route="logout", text="Log out")#</li>
-						</ul>
-					</li>
-				</ul>
-			</div>
+			<cfif signedIn()>
+				#linkTo(controller="#adminNamespace(currentUser.isAdministrator)#.dash", action="index", text=get("appName"), class="brand")#
+				<div class="nav-collapse">
+					<cfif currentUser.isAdministrator>
+						#includePartial("/layouts/masterMenu.cfm")#
+					<cfelse>
+						#includePartial("/layouts/adminMenu.cfm")#
+					</cfif>
+					<ul class="nav pull-right">
+						<li class="dropdown">
+							<a href="##" class="dropdown-toggle" data-toggle="dropdown">#currentUser.firstName#<b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<!--- <li>#linkTo(controller="admin.people", action="edit", key=res.me.id, text="Edit Profile")#</li> --->
+								<li>#linkTo(route="logout", text="Log out")#</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			<cfelse>
+				<span class="brand">#get("appName")#</span>
+			</cfif>
 		</div>
 	</div>
 </div>

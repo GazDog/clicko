@@ -46,7 +46,7 @@
 	/**
 	 * @hint Redirects to a stored location or default location.
 	 */
-	 public any function redirectBackOr(string controller="#adminNamespace(currentUser)#.dash", string action="index") {
+	 public any function redirectBackOr(string controller="#adminNamespace(currentUser.isAdministrator)#.dash", string action="index") {
 	 	 if ( StructKeyExists(session, "returnTo") ) {
 			var returnTo = Duplicate(session.returnTo);
 			StructDelete(session, "returnTo");
@@ -67,8 +67,10 @@
 	 /**
 	 * @hint Determines the correct namespaced admin folder.
 	 */
-	 public string function adminNamespace(required struct currentUser) {
-	 	 return arguments.currentUser.isAdministrator ? "master" : "admin";
+	 public string function adminNamespace(required boolean isAdministrator) {
+	 	// writeDump(arguments);
+	 	// abort;
+	 	return arguments.isAdministrator ? "master" : "admin";
 	 }
 
 	 /**

@@ -1,57 +1,23 @@
-<h1>Editing customer</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Edit Customer - #customer.name#')#
 			
-			#errorMessagesFor("customer")#
+	#errorMessagesFor("customer")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="update", key=params.key)#
+				<fieldset>
 		
-				
-															
-				
-					
-						#textField(objectName='customer', property='agencyid', label='Agencyid')#
-															
-				
-					
-						#textField(objectName='customer', property='name', label='Name')#
-															
-				
-					
-						#textField(objectName='customer', property='website', label='Website')#
-															
-				
-					
-						#textField(objectName='customer', property='phone', label='Phone')#
-															
-				
-					
-						#textField(objectName='customer', property='email', label='Email')#
-															
-				
-					
-						#textField(objectName='customer', property='statusid', label='Statusid')#
-															
-				
-					
-						#textField(objectName='customer', property='accesslevel', label='Accesslevel')#
-															
-				
-															
-				
-															
-				
-															
-				
-				
-				#submitTag()#
-				
-			#endFormTag()#
-			
-		
+					#includePartial("form")#
 
-#linkTo(text="Return to the listing", action="index")#
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
+			#endFormTag()#
+		</div>		
+	</div>		
+
 </cfoutput>

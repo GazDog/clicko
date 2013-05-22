@@ -29,7 +29,8 @@ component
 		}
 		else {
 			signIn(user);
-			redirectBackOr(controller="#adminNamespace(currentUser())#.dash", action="index");
+			user.update(lastLoginAt=Now(), loginCount=Val(user.loginCount) + 1);
+			redirectBackOr(controller="#adminNamespace(user.isAdministrator)#.dash", action="index");
 		}
 	}
 
