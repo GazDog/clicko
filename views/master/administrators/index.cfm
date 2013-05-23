@@ -1,7 +1,5 @@
 <cfoutput>
 	#pageTitle("#get('appName')# Administrators")#
-
-	#flashMessageTag()#
 	
 	<p>#linkTo(text="New Administrator", action="new", class="btn")#</p>
 	

@@ -1,12 +1,25 @@
 <cfcomponent extends="Controller" output="false">
 	
 	<cffunction name="init">
-		
+		<cfset super.init()>
+		<!--- TODO: once automatic datafuntions is working.. use a private 'form' method --->
+		<cfset filters(through="getCustomers", only="new,edit,create,update")>
 	</cffunction>
+
+	<!--- 
+	** FILTERS **
+	--->
+	<cffunction name="getCustomers">
+		<cfset customers = model("Customer").findAll(select="id, name", where="agencyid = #currentUser.agencyid#", order="name")>
+	</cffunction>
+
+	<!--- 
+	** PUBLIC **
+	--->
 
 	<!--- publishers/index --->
 	<cffunction name="index">
-		<cfset publishers = model("Publisher").findAll(include="customer(agency)")>
+		<cfset publishers = model("Publisher").findAll(where="agencyid = #currentUser.agencyid#", include="customer(agency)")>
 	</cffunction>
 	
 	<!--- publishers/show/key --->
@@ -36,7 +49,7 @@
     	
     	<!--- Check if the record exists --->
 	    <cfif NOT IsObject(publisher)>
-	        <cfset flashInsert(error="Publisher #params.key# was not found")>
+	        <cfset flashInsert(message="Publisher #params.key# was not found", messageType="error")>
 			<cfreturn redirectTo(action="index", delay=true)>
 	    </cfif>
 		
@@ -48,11 +61,11 @@
 		
 		<!--- Verify that the publisher creates successfully --->
 		<cfif publisher.save()>
-			<cfset flashInsert(success="The publisher was created successfully.")>
+			<cfset flashInsert(message="The publisher was created successfully.", messageType="success")>
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error creating the publisher.")>
+			<cfset flashInsert(message="There was an error creating the publisher.", messageType="error")>
 			<cfset renderPage(action="new")>
 		</cfif>
 	</cffunction>
@@ -63,11 +76,11 @@
 		
 		<!--- Verify that the publisher updates successfully --->
 		<cfif publisher.update(params.publisher)>
-			<cfset flashInsert(success="The publisher was updated successfully.")>	
+			<cfset flashInsert(message="The publisher was updated successfully.", messageType="success")>	
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error updating the publisher.")>
+			<cfset flashInsert(message="There was an error updating the publisher.", messageType="error")>
 			<cfset renderPage(action="edit")>
 		</cfif>
 	</cffunction>
@@ -78,11 +91,11 @@
 		
 		<!--- Verify that the publisher deletes successfully --->
 		<cfif publisher.delete()>
-			<cfset flashInsert(success="The publisher was deleted successfully.")>	
+			<cfset flashInsert(message="The publisher was deleted successfully.", messageType="success")>	
             <cfreturn redirectTo(action="index", delay=true)>
 		<!--- Otherwise --->
 		<cfelse>
-			<cfset flashInsert(error="There was an error deleting the publisher.")>
+			<cfset flashInsert(message="There was an error deleting the publisher.", messageType="error")>
 			<cfreturn redirectTo(action="index", delay=true)>
 		</cfif>
 	</cffunction>

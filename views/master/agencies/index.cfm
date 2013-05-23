@@ -1,7 +1,5 @@
 <cfoutput>
 	#pageTitle("Agencies")#
-
-	#flashMessageTag()#
 	
 	<p>#linkTo(text="New Agency", action="new", class="btn")#</p>
 	

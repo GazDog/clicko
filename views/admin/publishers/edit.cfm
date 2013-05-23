@@ -1,57 +1,23 @@
-<h1>Editing publisher</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Edit Publisher - #publisher.name#')#
 			
-			#errorMessagesFor("publisher")#
+	#errorMessagesFor("publisher")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="update", key=params.key)#
+				<fieldset>
 		
-				
-															
-				
-					
-						#textField(objectName='publisher', property='customerid', label='Customerid')#
-															
-				
-					
-						#textField(objectName='publisher', property='name', label='Name')#
-															
-				
-					
-						#textField(objectName='publisher', property='website', label='Website')#
-															
-				
-					
-						#textField(objectName='publisher', property='contactname', label='Contactname')#
-															
-				
-					
-						#textField(objectName='publisher', property='phone', label='Phone')#
-															
-				
-					
-						#textField(objectName='publisher', property='email', label='Email')#
-															
-				
-					
-						#textField(objectName='publisher', property='statusid', label='Statusid')#
-															
-				
-															
-				
-															
-				
-															
-				
-				
-				#submitTag()#
-				
-			#endFormTag()#
-			
-		
+					#includePartial("form")#
 
-#linkTo(text="Return to the listing", action="index")#
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
+			#endFormTag()#
+		</div>		
+	</div>		
+
 </cfoutput>

@@ -1,58 +1,23 @@
-<h1>Create a New publisher</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('New Publisher')#
 			
-			
-			#errorMessagesFor("publisher")#
+	#errorMessagesFor("publisher")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="create")#
+				<fieldset>
 		
-				
-																
-				
-					
-						#textField(objectName='publisher', property='customerid', label='Customerid')#
-																
-				
-					
-						#textField(objectName='publisher', property='name', label='Name')#
-																
-				
-					
-						#textField(objectName='publisher', property='website', label='Website')#
-																
-				
-					
-						#textField(objectName='publisher', property='contactname', label='Contactname')#
-																
-				
-					
-						#textField(objectName='publisher', property='phone', label='Phone')#
-																
-				
-					
-						#textField(objectName='publisher', property='email', label='Email')#
-																
-				
-					
-						#textField(objectName='publisher', property='statusid', label='Statusid')#
-																
-				
-																
-				
-																
-				
-																
-				
+					#includePartial("form")#
 
-				#submitTag()#
-				
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
 			#endFormTag()#
-			
-		
+		</div>		
+	</div>		
 
-#linkTo(text="Return to the listing", action="index")#
 </cfoutput>

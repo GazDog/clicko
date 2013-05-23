@@ -1,50 +1,23 @@
-<h1>Create a New campaign</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('New Campaign')#
 			
-			
-			#errorMessagesFor("campaign")#
+	#errorMessagesFor("campaign")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="create")#
+				<fieldset>
 		
-				
-																
-				
-					
-						#textField(objectName='campaign', property='customerid', label='Customerid')#
-																
-				
-					
-						#textField(objectName='campaign', property='name', label='Name')#
-																
-				
-					
-						#dateTimeSelect(objectName='campaign', property='startat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Startat')#
-																
-				
-					
-						#dateTimeSelect(objectName='campaign', property='finishat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Finishat')#
-																
-				
-					
-						#textField(objectName='campaign', property='creatoruserid', label='Creatoruserid')#
-																
-				
-																
-				
-																
-				
-																
-				
+					#includePartial("form")#
 
-				#submitTag()#
-				
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
 			#endFormTag()#
-			
-		
+		</div>		
+	</div>		
 
-#linkTo(text="Return to the listing", action="index")#
 </cfoutput>

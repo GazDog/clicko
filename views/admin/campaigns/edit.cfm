@@ -1,49 +1,23 @@
-<h1>Editing campaign</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Edit Campaign - #campaign.name#')#
 			
-			#errorMessagesFor("campaign")#
+	#errorMessagesFor("campaign")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="update", key=params.key)#
+				<fieldset>
 		
-				
-															
-				
-					
-						#textField(objectName='campaign', property='customerid', label='Customerid')#
-															
-				
-					
-						#textField(objectName='campaign', property='name', label='Name')#
-															
-				
-					
-						#dateTimeSelect(objectName='campaign', property='startat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Startat')#
-															
-				
-					
-						#dateTimeSelect(objectName='campaign', property='finishat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Finishat')#
-															
-				
-					
-						#textField(objectName='campaign', property='creatoruserid', label='Creatoruserid')#
-															
-				
-															
-				
-															
-				
-															
-				
-				
-				#submitTag()#
-				
-			#endFormTag()#
-			
-		
+					#includePartial("form")#
 
-#linkTo(text="Return to the listing", action="index")#
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
+			#endFormTag()#
+		</div>		
+	</div>		
+
 </cfoutput>

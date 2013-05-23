@@ -1,7 +1,5 @@
 <h1>Showing campaign</h1>
 
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
 			

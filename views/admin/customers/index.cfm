@@ -1,8 +1,6 @@
 <cfoutput>
 	#pageTitle("Customers")#
 
-	#flashMessageTag()#
-	
 	<p>#linkTo(text="New Customer", action="new", class="btn")#</p>
 	
 	<table class="table table-striped">
@@ -20,7 +18,7 @@
 		<tbody>
 			<cfoutput query="customers">
 				<tr>
-					<td>#linkTo(text="#name#", action='show', key=id)#</td>
+					<td>#linkTo(text=name, action='show', key=id)#</td>
 					<td>#linkTo(href=website, text=shortURL(website), target="_blank")#</td>
 					<td>#phone#</td>
 					<td>#email#</td>

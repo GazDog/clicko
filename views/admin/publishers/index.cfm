@@ -1,7 +1,5 @@
 <cfoutput>
 	#pageTitle("Publishers")#
-
-	#flashMessageTag()#
 	
 	<p>#linkTo(text="New Publisher", action="new", class="btn")#</p>
 	
@@ -9,6 +7,7 @@
 		<thead>
 			<tr>
 				<th>Name</th>
+				<th>Customer</th>
 				<th>Website</th>
 				<th>Contact</th>
 				<th>Phone</th>
@@ -22,6 +21,7 @@
 			<cfoutput query="publishers">
 				<tr>
 					<td>#linkTo(text="#name#", action='show', key=id)#</td>
+					<td>#linkTo(text=customerName, route="customerPublishersShow", customerid=customerid, key=id)#</td>
 					<td>#linkTo(href=website, text=shortURL(website), target="_blank")#</td>
 					<td>#contactName#</td>
 					<td>#phone#</td>
