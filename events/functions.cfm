@@ -1,8 +1,8 @@
-﻿<cfinclude template="../utilities/complex.cfm">
-<cfinclude template="../utilities/date.cfm">
-<cfinclude template="../utilities/misc.cfm">
-<cfinclude template="../utilities/string.cfm">
-<cfinclude template="../utilities/system.cfm">
+﻿<cfinclude template="../lib/utilities/complex.cfm">
+<cfinclude template="../lib/utilities/date.cfm">
+<cfinclude template="../lib/utilities/misc.cfm">
+<cfinclude template="../lib/utilities/string.cfm">
+<cfinclude template="../lib/utilities/system.cfm">
 <cfscript>
 
 	// --------------------------------------------------
