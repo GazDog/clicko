@@ -118,7 +118,7 @@
 	</cfswitch>
 	
 	<cfoutput>
-		<cfimport taglib="/valkyrie/customtags/" prefix="tag">
+		<cfimport taglib="/clicko/customtags/" prefix="tag">
 		<cfsavecontent variable="loc.return">
 			<tag:controlGroup attributeCollection="#loc.tagAttr#">
 				#loc.input#
