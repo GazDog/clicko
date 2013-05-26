@@ -1,10 +1,6 @@
-<h1>Showing asset</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
-			
+	#pageTitle("#asset.name#")#			
 				
 					<p><span>Id</span> <br />
 						#asset.id#</p>
@@ -19,7 +15,7 @@
 						#asset.name#</p>
 				
 					<p><span>Sourceurl</span> <br />
-						#asset.sourceurl#</p>
+						#generateURL(asset.id)#</p>
 				
 					<p><span>Destinationurl</span> <br />
 						#asset.destinationurl#</p>

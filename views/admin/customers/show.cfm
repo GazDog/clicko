@@ -1,6 +1,6 @@
 <cfoutput>
 
-	<h1>#pageTitle(customer.name)#</h1>			
+	#pageTitle(customer.name)#
 	
 	<div class="row-fluid">
 		<div class="span4">

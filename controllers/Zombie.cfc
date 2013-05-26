@@ -46,9 +46,9 @@
 		<cfset $truncateTable("actions,agencies,assets,campaigns,changes,clicks,customers,publishers,users")>
 
 		<!--- administrators --->
-		<cfset adam = model("User").new(firstname="Adam", lastname="Chapman", position="Developer", email="adam.p.chapman@gmail.com", password=standardPassword, passwordConfirmation=standardPassword, isadministrator=1)>
+		<cfset adam = model("User").new(firstname="Adam", lastname="Chapman", position="Developer", phone="0412 460 371", email="adam.p.chapman@gmail.com", password=standardPassword, passwordConfirmation=standardPassword, isadministrator=1)>
 		<cfset adam.save()>
-		<cfset gaz = model("User").new(firstname="Garry", lastname="Morrow", position="Manager", email="garry@fullnoise.com.au", password=standardPassword, passwordConfirmation=standardPassword, isadministrator=1)>
+		<cfset gaz = model("User").new(firstname="Garry", lastname="Morrow", position="Manager", phone="0402 502 120", email="garry@fullnoise.com.au", password=standardPassword, passwordConfirmation=standardPassword, isadministrator=1)>
 		<cfset gaz.save()>
 
 <!--- 		<cfdump var="#adam.allErrors()#" abort="true">
@@ -67,7 +67,7 @@
 
 			<!--- users --->
 			<cfloop from="1" to="3" index="i">
-				<cfset user[i] = model("User").new(agencyid=zombie.key(), firstname=names[i], lastname=surnames[i], position="Dude", email="#names[i]#@zombie.com", password=standardPassword, passwordConfirmation=standardPassword)>
+				<cfset user[i] = model("User").new(agencyid=zombie.key(), firstname=names[i], lastname=surnames[i], position="Dude", phone="0400 000 000", email="#names[i]#@zombie.com", password=standardPassword, passwordConfirmation=standardPassword)>
 				<cfset user[i].save()>
 			</cfloop>
 			<!--- customers --->
@@ -195,7 +195,7 @@
 
 		<!--- users --->
 			<cfloop from="1" to="3" index="i">
-				<cfset user[i] = model("User").new(agencyid=burns.key(), firstname=names[i+3], lastname=surnames[i+3], position="Dude", email="#names[i+3]#@nuclearplant.com", password=standardPassword, passwordConfirmation=standardPassword)>
+				<cfset user[i] = model("User").new(agencyid=burns.key(), firstname=names[i+3], lastname=surnames[i+3], position="Dude", phone="0400 000 000", email="#names[i+3]#@nuclearplant.com", password=standardPassword, passwordConfirmation=standardPassword)>
 				<cfset user[i].save()>
 			</cfloop>
 			<!--- customers --->
@@ -321,7 +321,7 @@
 
 		<!--- users --->
 			<cfloop from="1" to="3" index="i">
-				<cfset user[i] = model("User").new(agencyid=six.key(), firstname=names[i+6], lastname=surnames[i+6], position="Dude", email="#names[i]#@six.com", password=standardPassword, passwordConfirmation=standardPassword)>
+				<cfset user[i] = model("User").new(agencyid=six.key(), firstname=names[i+6], lastname=surnames[i+6], position="Dude", phone="0400 000 000", email="#names[i]#@six.com", password=standardPassword, passwordConfirmation=standardPassword)>
 				<cfset user[i].save()>
 			</cfloop>
 			<!--- customers --->
@@ -443,7 +443,7 @@
 		<cfloop from="4" to="10" index="i">
 			<cfset agency = model("Agency").new(name="#names[i]# #alphabet[i]#. #phonetics[i]# Advertising", streetnumber=i * 6, streetname="#surnames[i]# Drive", suburb="#animals[i]# Flats", phone="(00#i#) 55#i# 4543", email="#names[i]#@hotmail.com")>
 			<cfset agency.save()>
-			<cfset model("User").new(agencyid=agency.key(), firstname=names[i+10], lastname=surnames[i+10], position="Dude", email="#names[i+10]#@hotmail.com", password=standardPassword, passwordConfirmation=standardPassword).save()>
+			<cfset model("User").new(agencyid=agency.key(), firstname=names[i+10], lastname=surnames[i+10], position="Dude", phone="0400 000 000", email="#names[i+10]#@hotmail.com", password=standardPassword, passwordConfirmation=standardPassword).save()>
 		</cfloop>
 
 		<cfif cgi.HTTP_REFERER IS "">
