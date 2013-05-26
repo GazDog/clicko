@@ -43,7 +43,6 @@ CREATE TABLE `customers` (
  `phone` VARCHAR(16),
  `email` VARCHAR(64),
  `statusid` INT DEFAULT 1 NOT NULL,
- `accesslevel` INT DEFAULT 1 NOT NULL,
  `createdat` DATETIME,
  `updatedat` DATETIME,
  `deletedat` DATETIME
@@ -77,7 +76,6 @@ CREATE TABLE `assets` (
  `campaignid` INT NOT NULL,
  `publisherid` INT NOT NULL,
  `name` VARCHAR(64) NOT NULL,
- `sourceurl` VARCHAR(128) NOT NULL,
  `destinationurl` VARCHAR(128) NOT NULL,
  `startat` DATETIME,
  `finishat` DATETIME,
@@ -91,7 +89,6 @@ CREATE TABLE `clicks` (
  `assetid` INT NOT NULL,
  `ipaddress` VARCHAR(32) NOT NULL,
  `browser` VARCHAR(32) NOT NULL,
- `browserversion` VARCHAR(16) NOT NULL,
  `createdat` DATETIME
 );
 CREATE TABLE `actions` (
