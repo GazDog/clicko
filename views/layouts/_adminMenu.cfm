@@ -1,5 +1,24 @@
 <cfoutput>
-	<!--- <ul class="nav">
+	<ul class="nav">
+
+		<li class="dropdown">
+			<a href="##" class="dropdown-toggle" data-toggle="dropdown">New<b class="caret"></b></a>
+			<ul class="dropdown-menu">
+				<!--- TODO: limit customers by permission --->
+				<li>#linkTo(controller="admin.customers", action="new", text="Customer")#</li>
+				<li>#linkTo(controller="admin.publishers", action="new", text="Publisher")#</li>
+				<li>#linkTo(controller="admin.campaigns", action="new", text="Campaign")#</li>
+				<li>#linkTo(controller="admin.assets", action="new", text="Asset")#</li>
+			</ul>
+		</li>
+
+		<li>#linkTo(controller="admin.customers", action="index", text="Customers")#</li>
+		<li>#linkTo(controller="admin.publishers", action="index", text="Publishers")#</li>
+		<li>#linkTo(controller="admin.campaigns", action="index", text="Campaigns")#</li>
+		<li>#linkTo(controller="admin.assets", action="index", text="Assets")#</li>
+		
+		<!--- 
+			add more dropdowns here...
 		<li class="dropdown">
 			<a href="##" class="dropdown-toggle" data-toggle="dropdown">Add<b class="caret"></b></a>
 			<ul class="dropdown-menu">
@@ -7,21 +26,7 @@
 				<li>#linkTo(controller="admin.items", action="new", text="Item")#</li>
 			</ul>
 		</li>
-		<li class="dropdown">
-			<a href="##" class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-			<ul class="dropdown-menu">
-				<li>#linkTo(controller="admin.site", action="edit", text="Site")#</li>
-				<li>#linkTo(controller="admin.pages", action="index", text="Pages")#</li>
-				<li>#linkTo(controller="admin.items", action="index", text="Items")#</li>
-				<li>#linkTo(controller="admin.menuLinks", action="index", text="Menu")#</li>
-				<li>#linkTo(controller="admin.categories", action="index", text="Categories")#</li>
-				<li>#linkTo(controller="admin.attributeOptions", action="index", text="Attributes")#</li>
-				<li>#linkTo(controller="admin.people", action="index", text="Users")#</li>
-				<li>#linkTo(controller="admin.contacts", action="index", text="Contacts")#</li>
-			</ul>
-		</li>
+		 --->
+		
 	</ul>
-	<form class="navbar-search pull-left">
-	  <input type="text" class="search-query" id="search" placeholder="Search">
-	</form> --->
 </cfoutput>
