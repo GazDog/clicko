@@ -1,8 +1,6 @@
-<h1>Showing campaign</h1>
-
 <cfoutput>
 
-			
+	#pageTitle("#campaign.name# - #campaign.customer.name#")#		
 				
 					<p><span>Id</span> <br />
 						#campaign.id#</p>

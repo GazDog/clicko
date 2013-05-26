@@ -1,8 +1,29 @@
 <cfcomponent extends="Controller" output="false">
 	
+	<cffunction name="init">
+		<cfset super.init()>
+	</cffunction>
+
+
+
+	<!--- TODO: filters --->
+	<!--- TODO: messages --->
+	<!--- TODO: where agencyid = x --->
+
+	<!--- 
+	** FILTERS **
+	--->
+	<cffunction name="getCustomers">
+		<cfset customers = model("Customer").findAll(select="id, name", where="agencyid = #currentUser.agencyid#", order="name")>
+	</cffunction>
+
+	<!--- 
+	** PUBLIC **
+	--->
+
 	<!--- assets/index --->
 	<cffunction name="index">
-		<cfset assets = model("Asset").findAll()>
+		<cfset assets = model("Asset").findAll(include="Publisher(Customer),Campaign")>
 	</cffunction>
 	
 	<!--- assets/show/key --->

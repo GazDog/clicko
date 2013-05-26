@@ -1,61 +1,23 @@
-<h1>Editing asset</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
 
+	#pageTitle('Edit Asset - #asset.name#')#
 			
-			#errorMessagesFor("asset")#
+	#errorMessagesFor("asset")#
 	
+	<div class="row">
+		<div class="span12">
 			#startFormTag(action="update", key=params.key)#
+				<fieldset>
 		
-				
-															
-				
-					
-						#textField(objectName='asset', property='campaignid', label='Campaignid')#
-															
-				
-					
-						#textField(objectName='asset', property='publisherid', label='Publisherid')#
-															
-				
-					
-						#textField(objectName='asset', property='name', label='Name')#
-															
-				
-					
-						#textField(objectName='asset', property='sourceurl', label='Sourceurl')#
-															
-				
-					
-						#textField(objectName='asset', property='destinationurl', label='Destinationurl')#
-															
-				
-					
-						#dateTimeSelect(objectName='asset', property='startat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Startat')#
-															
-				
-					
-						#dateTimeSelect(objectName='asset', property='finishat', dateOrder='year,month,day', monthDisplay='abbreviations', label='Finishat')#
-															
-				
-					
-						#textField(objectName='asset', property='notes', label='Notes')#
-															
-				
-															
-				
-															
-				
-															
-				
-				
-				#submitTag()#
-				
-			#endFormTag()#
-			
-		
+					#includePartial("form")#
 
-#linkTo(text="Return to the listing", action="index")#
+					<div class="form-actions">
+						#submitTag(value="Save", class="btn btn-primary")#
+						#linkTo(text="Cancel", action="index", class="btn")#
+					</div>
+				</fieldset>
+			#endFormTag()#
+		</div>		
+	</div>		
+
 </cfoutput>

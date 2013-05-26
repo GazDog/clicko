@@ -1,4 +1,5 @@
 <cfoutput>
+	
 	#pageTitle("Campaigns")#
 	
 	<p>#linkTo(text="New Campaign", action="new", class="btn")#</p>

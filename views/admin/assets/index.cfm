@@ -1,43 +1,43 @@
-<h1>Listing assets</h1>
-
-<cfoutput>#includePartial("showFlash")#</cfoutput>
-
 <cfoutput>
-	<p>#linkTo(text="New asset", action="new")#</p>
-</cfoutput>
-
-<cftable query="assets" colHeaders="true" HTMLTable="true">
 	
-			
-				
-					<cfcol header="Id" text="#id#" />
-				
-					<cfcol header="Campaignid" text="#campaignid#" />
-				
-					<cfcol header="Publisherid" text="#publisherid#" />
-				
-					<cfcol header="Name" text="#name#" />
-				
-					<cfcol header="Sourceurl" text="#sourceurl#" />
-				
-					<cfcol header="Destinationurl" text="#destinationurl#" />
-				
-					<cfcol header="Startat" text="#startat#" />
-				
-					<cfcol header="Finishat" text="#finishat#" />
-				
-					<cfcol header="Notes" text="#notes#" />
-				
-					<cfcol header="Createdat" text="#createdat#" />
-				
-					<cfcol header="Updatedat" text="#updatedat#" />
-				
-					<cfcol header="Deletedat" text="#deletedat#" />
-				
-			
-		
-	<cfcol header="" text="#linkTo(text='Show', action='show', key=id)#" />
-	<cfcol header="" text="#linkTo(text='Edit', action='edit', key=id)#" />
-	<cfcol header="" text="#linkTo(text='Delete', action='delete', key=id, confirm='Are you sure?')#" />
-</cftable>
-
+	#pageTitle("Assets")#
+	
+	<p>#linkTo(text="New Asset", action="new", class="btn")#</p>
+	
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Customer</th>
+				<th>Publisher</th>
+				<th>Campaign</th>
+				<th>#get('appName')# URL</th>
+				<th>Destination</th>
+				<th>Start</th>
+				<th>Finish</th>
+				<th>Note</th>
+				<th>Created</th>
+				<th class="span1"></th>
+				<th class="span1"></th>
+			</tr>
+		</thead>
+		<tbody>
+			<cfoutput query="assets">
+				<tr>
+					<td>#linkTo(text=name, action='show', key=id)#</td>
+					<td>#linkTo(text=customerName, controller="customer", action="show", key=customerid)#</td>
+					<td>#linkTo(text=publisherName, route="customerPublishersShow", customerid=customerid, key=publisherid)#</td>
+					<td>#linkTo(text=campaignName, route="customerCampaignsShow", customerid=customerid, key=campaignid)#</td>
+					<td>#generateURL(id)#</td>
+					<td>#destinationURL#</td>
+					<td>#showDate(startAt)#</td>
+					<td>#showDate(finishAt)#</td>
+					<td><icon clas="icon-comment"></icon></td>
+					<td>#timeAgoInWords(createdAt)# ago</td>
+					<td>#linkTo(text='Edit', action='edit', key=id)#</td>
+					<td>#linkTo(text='Delete', action='delete', key=id, confirm='Are you sure?')#</td>
+				</tr>
+			</cfoutput>
+		</tbody>
+	</table>
+</cfoutput>

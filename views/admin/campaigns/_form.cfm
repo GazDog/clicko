@@ -1,6 +1,6 @@
 <cfoutput>
 	<cfif campaign.isNew()>
-		#input(inputType="select", objectName='campaign', property='customerid', options=customers, label='Customerid')#
+		#input(inputType="select", objectName='campaign', property='customerid', options=customers, label='Customer')#
 	<cfelse>
 		<!--- TODO: maybe show the customer --->
 	</cfif>
